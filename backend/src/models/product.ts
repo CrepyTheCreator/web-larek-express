@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 type TImage = {
   fileName: string;
-  originName: string;
+  originalName: string;
 }
 
 interface IProduct {
