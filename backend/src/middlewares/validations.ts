@@ -46,39 +46,6 @@ export const validateOrderBody = celebrate({
   }),
 });
 
-export const validateObjId = celebrate({
-  [Segments.PARAMS]: Joi.object().keys({
-    id: Joi.string().hex().length(24).required(),
-  }),
-});
-
-export const validateProductUpdateBody = celebrate({
-  [Segments.BODY]: Joi.object().keys({
-    title: Joi.string().required().min(2).max(30)
-      .messages({
-        'any.required': 'Поле "title" обязательно',
-        'string.min': 'Минимальная длина поля "title" – 2 символа',
-        'string.max': 'Максимальная длина поля "title" – 30 символов',
-      }),
-    image: Joi.object({
-      fileName: Joi.string().required().messages({
-        'any.required': 'Поле "image.fileName" обязательно',
-      }),
-      originalName: Joi.string().required().messages({
-        'any.required': 'Поле "image.originalName" обязательно',
-      }),
-    }).required().messages({
-      'any.required': 'Поле "image" обязательно',
-      'object.base': 'Поле "image" должно быть объектом',
-    }),
-    category: Joi.string().required().messages({
-      'any.required': 'Поле "category" обязательно',
-    }),
-    description: Joi.string().optional(),
-    price: Joi.number().optional().allow(null),
-  }),
-});
-
 export const validateProductBody = celebrate({
   [Segments.BODY]: Joi.object().keys({
     title: Joi.string().required().min(2).max(30)

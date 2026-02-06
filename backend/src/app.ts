@@ -1,11 +1,12 @@
 import express from 'express';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import cors from 'cors';
 import mongoose from 'mongoose';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import dotenv from 'dotenv';
+import { errors as celebrateErrors } from 'celebrate';
 import path from 'path';
 import router from './routes/routes';
+import { errorLogger, requestLogger } from './middlewares/logger';
+import errorHandler from './middlewares/error-handler';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -15,11 +16,19 @@ const app = express();
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(requestLogger);
+
 app.use(router);
+
+app.use(errorLogger);
+
+app.use(celebrateErrors());
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен на порте: ${PORT}`);

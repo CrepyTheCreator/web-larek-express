@@ -9,7 +9,6 @@ const catchMongooseErrors = (error: unknown, next: NextFunction): boolean => {
     return true;
   }
 
-  // 409 Conflict
   if (error instanceof Error && error.message.includes('E11000')) {
     next(new ConflictError('Продукт с таким названием уже существует'));
     return true;
