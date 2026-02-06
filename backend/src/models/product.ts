@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema<IProduct>({
       type: String,
       required: true,
     },
-    originName: {
+    originalName: {
       type: String,
       required: true,
     },

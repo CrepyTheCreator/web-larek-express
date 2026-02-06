@@ -18,6 +18,16 @@ export const getProducts = async (_req: Request, res: Response, next: NextFuncti
 
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const existingProduct = await Product.findOne({
+      title: req.body.title,
+    });
+
+    if (existingProduct) {
+      return res.status(409).json({
+        message: 'Товар с таким названием уже существует',
+      });
+    }
+
     const product = await Product.create(req.body);
     res.status(201).json(product);
   } catch (error) {
