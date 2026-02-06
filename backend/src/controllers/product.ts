@@ -31,7 +31,9 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     const product = await Product.create(req.body);
     res.status(201).json(product);
   } catch (error) {
-    if (catchMongooseErrors(error, next)) return;
+    if (catchMongooseErrors(error, next)) {
+      return next();
+    }
     next(error);
   }
 };
