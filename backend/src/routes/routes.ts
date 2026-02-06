@@ -1,7 +1,7 @@
-import { validateOrderBody, validateProductBody } from "../middlewares/validations";
-import createOrder from "../controllers/order";
-import { createProduct, getProducts } from "../controllers/product";
-import { Router } from "express";
+import { Router } from 'express';
+import { validateOrderBody, validateProductBody } from '../middlewares/validations';
+import createOrder from '../controllers/order';
+import { createProduct, getProducts } from '../controllers/product';
 
 const router = Router();
 

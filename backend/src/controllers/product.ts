@@ -7,7 +7,7 @@ import NotFoundError from '../errors/not-found-error';
 export const getProducts = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const products = await Product.find({});
-    return res.json({ items: products, total: products.length });
+    return res.status(200).json({ items: products, total: products.length });
   } catch (error) {
     if (catchMongooseErrors(error, next)) {
       return next();

@@ -28,7 +28,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     return next(new BadRequestError('Неверная сумма заказа'));
   }
 
-  return res.send({ id: faker.string.ulid(), total: calculatedTotal });
+  return res.status(201).send({ id: faker.string.ulid(), total: calculatedTotal });
 };
 
 export default createOrder;
